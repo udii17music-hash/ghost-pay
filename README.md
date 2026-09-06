@@ -31,3 +31,4 @@ Open http://127.0.0.1:5000
 This is a local/demo wallet, not a real payment service. Do not use it to store real money, financial credentials, or production payment data.
 # ghost-pay
 # ghost-pay-2
+# ghost-pay-2
