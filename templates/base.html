@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>GhostPay</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<div class="app">
+  <aside class="sidebar">
+    <div class="brand"><span class="brand-mark">◈</span> GhostPay</div>
+    <nav>
+      <a href="{{ url_for('home') }}" class="{{ 'active' if request.endpoint=='home' else '' }}">⌂ <span>Home</span></a>
+      <a href="{{ url_for('create_code') }}" class="{{ 'active' if request.endpoint=='create_code' else '' }}">▣ <span>Create Code</span></a>
+      <a href="{{ url_for('redeem') }}" class="{{ 'active' if request.endpoint=='redeem' else '' }}">⌁ <span>Redeem Code</span></a>
+      <a href="{{ url_for('history') }}" class="{{ 'active' if request.endpoint=='history' else '' }}">◷ <span>History</span></a>
+      <a href="{{ url_for('wallet') }}" class="{{ 'active' if request.endpoint=='wallet' else '' }}">▤ <span>Wallet</span></a>
+      <a href="{{ url_for('admin') }}">▦ <span>Admin Dashboard</span></a>
+    </nav>
+    <a class="logout" href="{{ url_for('logout') }}">↪ Logout</a>
+  </aside>
+
+  <main class="main">
+    <header class="topbar">
+      <div class="page-title"><button class="menu" onclick="document.body.classList.toggle('sidebar-open')">☰</button> GhostPay</div>
+      <div class="user-chip">● {{ user.name }}</div>
+    </header>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% for category, message in messages %}
+        <div class="toast {{ category }}">{{ message }}</div>
+      {% endfor %}
+    {% endwith %}
+
+    {% block content %}{% endblock %}
+  </main>
+</div>
+</body>
+</html>

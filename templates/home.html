@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="hero">
+  <div>
+    <p class="eyebrow">Good day</p>
+    <h1>Welcome back, {{ user.name.split()[0] }} 👋</h1>
+    <p class="muted">Manage your wallet and secure payment codes.</p>
+  </div>
+</section>
+
+<div class="balance-card">
+  <div>
+    <span>Wallet Balance</span>
+    <strong>₹{{ "%.2f"|format(user.balance) }}</strong>
+    <a href="{{ url_for('wallet') }}">View Details →</a>
+  </div>
+  <div class="plus">+</div>
+</div>
+
+<div class="action-grid">
+  <a class="action purple" href="{{ url_for('create_code') }}"><b>▦</b><span>Create<br>Payment Code</span></a>
+  <a class="action green" href="{{ url_for('redeem') }}"><b>⌁</b><span>Redeem<br>Code</span></a>
+</div>
+
+<div class="section-head"><h2>Recent Transactions</h2><a href="{{ url_for('history') }}">View all</a></div>
+<div class="card">
+{% for tx in txs %}
+  <div class="tx">
+    <div class="tx-icon">{{ '+' if tx.type=='Code Redeemed' else '−' }}</div>
+    <div><b>{{ tx.type }}</b><small>{{ tx.created_at }}</small></div>
+    <strong class="{{ 'positive' if tx.type=='Code Redeemed' else 'negative' }}">{{ '+' if tx.type=='Code Redeemed' else '−' }} ₹{{ "%.2f"|format(tx.amount) }}</strong>
+  </div>
+{% else %}
+  <div class="empty">No transactions yet.</div>
+{% endfor %}
+</div>
+{% endblock %}

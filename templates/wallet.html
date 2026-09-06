@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="mobile-head"><h1>Wallet</h1></div>
+<div class="balance-card large">
+  <span>Available Balance</span>
+  <strong>₹{{ "%.2f"|format(user.balance) }}</strong>
+  <p>Demo wallet • local SQLite</p>
+</div>
+<div class="card info-grid">
+  <div><span>Wallet status</span><b class="positive">Operational</b></div>
+  <div><span>Currency</span><b>INR (₹)</b></div>
+  <div><span>Account</span><b>{{ user.email }}</b></div>
+</div>
+{% endblock %}

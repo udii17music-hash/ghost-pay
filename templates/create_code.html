@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="mobile-head">‹ <h1>Create Payment Code</h1></div>
+<div class="form-card">
+  <label>Enter Amount</label>
+  <div class="money-input"><span>₹</span><input id="amount" name="amount_preview" value="500" type="number" min="1"></div>
+  <div class="quick">
+    <button type="button" onclick="setAmount(100)">₹100</button>
+    <button type="button" onclick="setAmount(500)">₹500</button>
+    <button type="button" onclick="setAmount(1000)">₹1,000</button>
+    <button type="button" onclick="setAmount(5000)">₹5,000</button>
+  </div>
+  <form method="post">
+    <input type="hidden" id="realAmount" name="amount" value="500">
+    <label>Expiry Time</label>
+    <select name="expiry">
+      <option value="24">24 Hours</option>
+      <option value="48">48 Hours</option>
+      <option value="72">72 Hours</option>
+    </select>
+    <button class="primary full">Generate Code</button>
+  </form>
+</div>
+
+{% if generated %}
+<div class="success-card">
+  <div class="check">✓</div>
+  <h2>Payment Code Created!</h2>
+  <p class="muted">Send this code and PIN securely to the receiver.</p>
+  <div class="code-box">
+    <span>Payment Code</span><b>{{ generated.code }}</b>
+    <span>PIN</span><b>{{ generated.pin }}</b>
+    <span>Amount</span><b>₹{{ "%.2f"|format(generated.amount) }}</b>
+    <span>Expiry</span><b>{{ generated.expires }}</b>
+  </div>
+  <button class="secondary full" onclick="navigator.clipboard.writeText('{{ generated.code }}')">Copy Code</button>
+</div>
+{% endif %}
+
+<script>
+function setAmount(v){
+  document.getElementById('amount').value=v;
+  document.getElementById('realAmount').value=v;
+}
+document.getElementById('amount').addEventListener('input', e => {
+  document.getElementById('realAmount').value=e.target.value;
+});
+</script>
+{% endblock %}

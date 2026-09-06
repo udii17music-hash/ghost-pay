@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="hero"><div><p class="eyebrow">Admin</p><h1>Dashboard</h1><p class="muted">GhostPay system overview.</p></div></div>
+<div class="stats">
+  <div><span>Total Users</span><b>{{ stats.users }}</b><small>Demo accounts</small></div>
+  <div><span>Total Transactions</span><b>{{ stats.transactions }}</b><small>Recorded</small></div>
+  <div><span>Total Volume</span><b>₹{{ "%.2f"|format(stats.volume) }}</b><small>Successful</small></div>
+  <div><span>Active Codes</span><b>{{ stats.codes }}</b><small>Available</small></div>
+  <div><span>Total Fees Earned</span><b>₹{{ "%.2f"|format(stats.fees) }}</b><small>Demo estimate</small></div>
+</div>
+<div class="two-col">
+<div class="card"><div class="section-head"><h2>Recent Transactions</h2></div>
+{% for tx in recent %}
+<div class="tx"><div class="tx-icon">↔</div><div class="grow"><b>{{ tx.type }}</b><small>{{ tx.tx_id }} · {{ tx.created_at }}</small></div><strong>₹{{ "%.2f"|format(tx.amount) }}</strong></div>
+{% endfor %}
+</div>
+<div class="card"><div class="section-head"><h2>Active Payment Codes</h2></div>
+{% for c in codes %}
+<div class="code-row"><b>{{ c.code }}</b><span>₹{{ "%.2f"|format(c.amount) }}</span><em>{{ c.status }}</em></div>
+{% endfor %}
+</div>
+</div>
+{% endblock %}

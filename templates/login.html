@@ -1,0 +1,23 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>GhostPay Login</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body class="login-page">
+<div class="login-card">
+  <div class="brand big"><span class="brand-mark">◈</span> GhostPay</div>
+  <p class="muted">Secure payment-code wallet demo</p>
+  <form method="post">
+    <label>Email</label>
+    <input name="email" type="email" placeholder="demo@ghostpay.local" required>
+    <label>Password</label>
+    <input name="password" type="password" placeholder="demo123" required>
+    <button class="primary full">Login</button>
+  </form>
+  <div class="demo-box">Demo: <b>demo@1223 </b> / <b>demo123</b></div>
+</div>
+</body>
+</html>

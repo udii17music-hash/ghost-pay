@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="mobile-head">‹ <h1>Redeem Code</h1></div>
+<div class="form-card">
+<form method="post">
+  <label>Enter Payment Code</label>
+  <input name="code" placeholder="GP-8XK4-PQ72" required>
+  <label>Enter PIN</label>
+  <input name="pin" type="password" inputmode="numeric" maxlength="4" placeholder="••••" required>
+  <button class="primary full">Verify Code</button>
+</form>
+<div class="security-note">🔒 Make sure you have received the code and PIN from a trusted person.</div>
+</div>
+
+{% if result %}
+<div class="success-card">
+  <div class="check">✓</div>
+  <h2>Payment Redeemed!</h2>
+  <div class="big-amount">₹{{ "%.2f"|format(result.amount) }}</div>
+  <p class="muted">has been added to your wallet</p>
+  <div class="code-box">
+    <span>From</span><b>Secure Code</b>
+    <span>Amount</span><b>₹{{ "%.2f"|format(result.amount) }}</b>
+    <span>Date & Time</span><b>{{ result.created_at }}</b>
+    <span>Transaction ID</span><b>{{ result.tx_id }}</b>
+  </div>
+  <a class="primary full button-link" href="{{ url_for('home') }}">Go to Home</a>
+</div>
+{% endif %}
+{% endblock %}
